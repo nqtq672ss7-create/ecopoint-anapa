@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЭКО-ТОЧКА | Премиальная мебель в Анапе</title>
-    <meta name="description" content="Изготовление корпусной мебели премиум-класса. Кухни, шкафы, офисная мебель. Индивидуальный дизайн и высокое качество.">
+    <title>ЭКО-ТОЧКА | Премиальная Мебель</title>
+    <meta name="description" content="Корпусная мебель премиум-класса, кухни и шкафы на заказ в Анапе.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind CSS (via CDN for single file) -->
+    <!-- Tailwind CSS (via CDN for standalone usage) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        dark: {
-                            900: '#050505',
-                            800: '#0a0a0a',
-                            700: '#141414',
-                        },
-                        lime: {
-                            accent: '#ccff00',
-                            glow: 'rgba(204, 255, 0, 0.4)',
+                        brand: {
+                            lime: '#D4F234', // Лаймовый акцент
+                            dark: '#0a0a0a', // Глубокий черный
+                            gray: '#171717', // Темно-серый фон блоков
+                            surface: '#1F1F1F'
                         }
                     },
                     fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif'],
+                        display: ['Bebas Neue', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'hero-pattern': "url('https://i.ibb.co/60B1mjXM/IMG-5045.jpg')",
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(212, 242, 52, 0.1)' },
+                            '50%': { boxShadow: '0 0 25px rgba(212, 242, 52, 0.4)' },
+                        }
                     }
                 }
             }
@@ -47,18 +56,13 @@
 
     <style>
         /* Custom Premium Styles */
-        :root {
-            --cursor-size: 20px;
-        }
-
         body {
             background-color: #050505;
             color: #e5e5e5;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
-
-        /* Scrollbar */
+        
+        /* Smooth Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -70,24 +74,17 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #ccff00;
-        }
-
-        /* Selection */
-        ::selection {
-            background: #ccff00;
-            color: #000;
+            background: #D4F234;
         }
 
         /* Glassmorphism Utilities */
-        .glass-panel {
+        .glass {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-
+        
         .glass-nav {
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(16px);
@@ -95,57 +92,40 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Typography & Glows */
-        .text-glow {
-            text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
-        }
-        
-        .box-glow:hover {
-            box-shadow: 0 0 25px rgba(204, 255, 0, 0.15);
-            border-color: rgba(204, 255, 0, 0.3);
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Animations */
-        .fade-in-up {
+        .glass-card:hover {
+            border-color: rgba(212, 242, 52, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5), 0 0 20px rgba(212, 242, 52, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Typography Accents */
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #a3a3a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(212, 242, 52, 0.1);
+        }
+
+        /* Animation Classes */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
-        
-        .fade-in-up.visible {
+
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .hover-scale-img {
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .group:hover .hover-scale-img {
-            transform: scale(1.05);
-        }
-
-        /* Horizontal Scroll Snap for Mobile */
-        .snap-scroll-x {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 1rem;
-            padding-bottom: 1rem;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .snap-scroll-x > * {
-            scroll-snap-align: center;
-            flex-shrink: 0;
-        }
-
-        /* Parallax Background */
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
         }
 
         /* Loader */
@@ -159,680 +139,614 @@
             align-items: center;
             transition: opacity 0.5s ease;
         }
-        .loader-line {
-            width: 0;
-            height: 2px;
-            background: #ccff00;
-            animation: loadLine 1.5s ease-in-out forwards;
-        }
-        @keyframes loadLine {
-            0% { width: 0; }
-            100% { width: 150px; }
-        }
-
-        /* Subtle Noise Texture */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.03;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=');
-        }
     </style>
 </head>
-<body class="antialiased">
+<body class="relative">
 
-    <!-- Loader -->
+    <!-- Loading Screen -->
     <div id="loader">
-        <div class="loader-line"></div>
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 border-4 border-brand-lime border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 font-display tracking-widest text-xl text-brand-lime animate-pulse">ЭКО-ТОЧКА</p>
+        </div>
     </div>
 
-    <!-- Noise Texture -->
-    <div class="noise-overlay"></div>
+    <!-- Background Noise Overlay -->
+    <div class="fixed inset-0 bg-noise pointer-events-none z-50 opacity-40 mix-blend-overlay"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+    <nav class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
-                <img src="https://i.ibb.co/mr7nJRW4/1134-20260209151536.png" alt="ЭКО-ТОЧКА Лого" class="h-10 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105">
-                <span class="font-display font-bold text-xl tracking-wider text-white hidden sm:block group-hover:text-lime-accent transition-colors">ЭКО-ТОЧКА</span>
+                <img src="https://i.ibb.co/mr7nJRW4/1134-20260209151536.png" alt="Эко-Точка" class="h-10 w-auto brightness-200 group-hover:drop-shadow-[0_0_8px_rgba(212,242,52,0.5)] transition-all">
+                <span class="font-display text-2xl tracking-wider text-white hidden sm:block">ЭКО<span class="text-brand-lime">-ТОЧКА</span></span>
             </a>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#categories" class="text-sm uppercase tracking-widest hover:text-lime-accent transition-colors duration-300">Категории</a>
-                <a href="#portfolio" class="text-sm uppercase tracking-widest hover:text-lime-accent transition-colors duration-300">Портфолио</a>
-                <a href="#why-us" class="text-sm uppercase tracking-widest hover:text-lime-accent transition-colors duration-300">Преимущества</a>
-                <a href="#about" class="text-sm uppercase tracking-widest hover:text-lime-accent transition-colors duration-300">О компании</a>
-                <a href="#reviews" class="text-sm uppercase tracking-widest hover:text-lime-accent transition-colors duration-300">Отзывы</a>
+            <div class="hidden md:flex items-center space-x-8 font-body text-sm tracking-wide text-gray-300">
+                <a href="#categories" class="hover:text-brand-lime transition-colors">Категории</a>
+                <a href="#portfolio" class="hover:text-brand-lime transition-colors">Портфолио</a>
+                <a href="#why-us" class="hover:text-brand-lime transition-colors">Почему мы</a>
+                <a href="#process" class="hover:text-brand-lime transition-colors">Процесс</a>
+                <a href="#reviews" class="hover:text-brand-lime transition-colors">Отзывы</a>
             </div>
 
             <!-- CTA & Mobile Toggle -->
             <div class="flex items-center gap-4">
-                <a href="https://t.me/ecopointanapa" target="_blank" class="hidden md:inline-flex items-center gap-2 px-6 py-2 border border-lime-accent/50 rounded-full text-lime-accent text-xs font-bold uppercase tracking-widest hover:bg-lime-accent hover:text-black transition-all duration-300 hover:shadow-[0_0_15px_rgba(204,255,0,0.5)]">
+                <a href="https://t.me/ecopointanapa" target="_blank" class="hidden md:inline-flex items-center gap-2 px-6 py-2 rounded-full border border-brand-lime/30 text-brand-lime hover:bg-brand-lime hover:text-black transition-all duration-300 font-medium text-sm shadow-[0_0_15px_rgba(212,242,52,0.1)] hover:shadow-[0_0_25px_rgba(212,242,52,0.4)]">
                     <span>Заявка</span>
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i data-lucide="send" class="w-4 h-4"></i>
                 </a>
-                
-                <button class="md:hidden text-2xl text-white hover:text-lime-accent transition-colors" id="mobile-menu-btn">
-                    <i class="fa-solid fa-bars-staggered"></i>
+                <button id="mobileMenuBtn" class="md:hidden text-white hover:text-brand-lime">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
                 </button>
             </div>
         </div>
-
+        
         <!-- Mobile Menu Overlay -->
-        <div class="absolute top-full left-0 w-full bg-dark-800/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 transform -translate-y-[150%] transition-transform duration-500 md:hidden" id="mobile-menu">
-            <a href="#categories" class="text-lg font-display uppercase hover:text-lime-accent">Категории</a>
-            <a href="#portfolio" class="text-lg font-display uppercase hover:text-lime-accent">Портфолио</a>
-            <a href="#why-us" class="text-lg font-display uppercase hover:text-lime-accent">Преимущества</a>
-            <a href="#about" class="text-lg font-display uppercase hover:text-lime-accent">О компании</a>
-            <a href="#reviews" class="text-lg font-display uppercase hover:text-lime-accent">Отзывы</a>
-            <a href="https://t.me/ecopointanapa" class="text-lime-accent font-bold uppercase flex items-center gap-2">
-                Заявка в Telegram <i class="fa-solid fa-arrow-right"></i>
-            </a>
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 md:hidden">
+            <button id="closeMenuBtn" class="absolute top-6 right-6 text-white/50 hover:text-brand-lime">
+                <i data-lucide="x" class="w-10 h-10"></i>
+            </button>
+            <a href="#categories" class="text-3xl font-display text-white hover:text-brand-lime mobile-link">Категории</a>
+            <a href="#portfolio" class="text-3xl font-display text-white hover:text-brand-lime mobile-link">Портфолио</a>
+            <a href="#why-us" class="text-3xl font-display text-white hover:text-brand-lime mobile-link">Преимущества</a>
+            <a href="#about" class="text-3xl font-display text-white hover:text-brand-lime mobile-link">О компании</a>
+            <a href="https://t.me/ecopointanapa" class="mt-8 px-8 py-3 bg-brand-lime text-black font-bold rounded-full text-lg">Заказать в Telegram</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Image with Overlay -->
+    <section class="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+        <!-- Background with Parallax -->
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-dark-900 z-10"></div>
-            <img src="https://i.ibb.co/60B1mjXM/IMG-5045.jpg" alt="Interior Background" class="w-full h-full object-cover grayscale opacity-60 scale-105 animate-slow-zoom">
+            <img src="https://i.ibb.co/60B1mjXM/IMG-5045.jpg" alt="Luxury Interior" class="w-full h-full object-cover filter brightness-[0.3] grayscale scale-110" id="hero-bg">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-[#050505]/80"></div>
         </div>
 
-        <!-- Decorative Elements -->
-        <div class="absolute top-1/4 left-10 w-64 h-64 bg-lime-accent/10 rounded-full blur-[100px] animate-pulse z-10"></div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] z-10"></div>
-
         <!-- Content -->
-        <div class="relative z-20 container mx-auto px-4 text-center max-w-4xl pt-20">
-            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase leading-tight tracking-tight mb-6 fade-in-up">
-                Мебель <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-400">Премиум</span><br>
-                <span class="text-lime-accent text-glow">Класса</span>
-            </h1>
-            
-            <p class="font-sans text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light fade-in-up delay-100">
-                Создаём индивидуальную мебель, которая подчёркивает стиль и статус вашего дома. Эстетика, качество, долговечность.
-            </p>
-
-            <div class="fade-in-up delay-200">
-                <a href="https://t.me/ecopointanapa" target="_blank" class="inline-flex items-center gap-3 bg-lime-accent text-black font-bold py-4 px-10 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(204,255,0,0.4)]">
-                    <span>Связаться в Telegram</span>
-                    <i class="fa-brands fa-telegram text-xl"></i>
-                </a>
+        <div class="relative z-10 container mx-auto px-6 text-center max-w-5xl pt-20">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8 animate-float">
+                <span class="w-2 h-2 rounded-full bg-brand-lime animate-pulse"></span>
+                <span class="text-xs uppercase tracking-widest text-white/70">Мебельное производство Анапа</span>
             </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <i class="fa-solid fa-chevron-down text-white/50 text-xl"></i>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-tight text-white mb-6 reveal active drop-shadow-2xl">
+                Мебель <span class="text-brand-lime text-glow italic">Premium</span> Класса<br>
+                Для Вашего Интерьера
+            </h1>
+
+            <p class="font-body text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed reveal active" style="transition-delay: 200ms;">
+                Создаём индивидуальную мебель, которая подчёркивает стиль и статус вашего дома. Эстетика, функциональность и безупречное качество сборки.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal active" style="transition-delay: 400ms;">
+                <a href="https://t.me/ecopointanapa" class="px-8 py-4 bg-brand-lime text-brand-dark font-bold tracking-wide rounded hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(212,242,52,0.3)] flex items-center gap-2">
+                    Связаться в Telegram
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#portfolio" class="px-8 py-4 border border-white/20 text-white rounded hover:bg-white/5 hover:border-brand-lime/50 transition-all duration-300">
+                    Смотреть портфолио
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-50">
+            <span class="text-[10px] uppercase tracking-[0.2em] text-white/50">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-brand-lime to-transparent"></div>
+        </div>
+        
+        <!-- Decorative Glows -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-lime/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+    </section>
+
+    <!-- Categories (Text Only) -->
+    <section id="categories" class="py-24 bg-[#080808] relative">
+        <div class="container mx-auto px-6">
+            <div class="mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl text-white mb-4">Наши <span class="text-brand-lime">Направления</span></h2>
+                <div class="h-1 w-20 bg-brand-lime rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-white/10">
+                <!-- Category Item Mixin Logic in HTML -->
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Кухни</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
+
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Шкафы</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
+
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Шкафы-Купе</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
+
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Офисная Мебель</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
+
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Детская Мебель</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
+
+                <div class="group relative border-r border-b border-white/10 p-10 md:p-14 cursor-pointer hover:bg-white/[0.02] transition-colors reveal">
+                    <h3 class="font-display text-3xl md:text-4xl text-gray-400 group-hover:text-white group-hover:translate-x-4 transition-all duration-300">Корпусная Мебель</h3>
+                    <i data-lucide="arrow-up-right" class="absolute top-10 right-10 text-brand-lime opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-brand-lime group-hover:w-full transition-all duration-500"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Categories Block (Text Only) -->
-    <section id="categories" class="py-24 bg-dark-900 relative">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Category Item -->
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Кухни
-                    </h3>
+    <!-- Why Choose Us -->
+    <section id="why-us" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-lime/5 skew-x-12 blur-3xl pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-lime tracking-widest uppercase text-sm font-semibold mb-2 block">Ценности</span>
+                <h2 class="font-display text-4xl md:text-5xl text-white">Почему <span class="italic text-gray-400">Выбирают Нас</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-xl reveal relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl group-hover:bg-brand-lime/20 transition-all"></div>
+                    <i data-lucide="gem" class="w-10 h-10 text-brand-lime mb-6"></i>
+                    <h3 class="font-display text-xl text-white mb-3">Премиальные материалы</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Используем только экологичные и долговечные материалы от проверенных европейских поставщиков.</p>
                 </div>
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Шкафы
-                    </h3>
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-xl reveal relative overflow-hidden group" style="transition-delay: 100ms;">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl group-hover:bg-brand-lime/20 transition-all"></div>
+                    <i data-lucide="pencil-ruler" class="w-10 h-10 text-brand-lime mb-6"></i>
+                    <h3 class="font-display text-xl text-white mb-3">Индивидуальный дизайн</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Каждый проект создается с нуля, учитывая эргономику вашего помещения и личный стиль.</p>
                 </div>
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Шкафы-купе
-                    </h3>
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-xl reveal relative overflow-hidden group" style="transition-delay: 200ms;">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl group-hover:bg-brand-lime/20 transition-all"></div>
+                    <i data-lucide="factory" class="w-10 h-10 text-brand-lime mb-6"></i>
+                    <h3 class="font-display text-xl text-white mb-3">Собственное производство</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Современные станки с ЧПУ и высокоточная обработка гарантируют идеальную сборку.</p>
                 </div>
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Офисная мебель
-                    </h3>
+                <!-- Card 4 -->
+                <div class="glass-card p-8 rounded-xl reveal relative overflow-hidden group" style="transition-delay: 300ms;">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl group-hover:bg-brand-lime/20 transition-all"></div>
+                    <i data-lucide="clock" class="w-10 h-10 text-brand-lime mb-6"></i>
+                    <h3 class="font-display text-xl text-white mb-3">Сроки и надёжность</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Мы ценим ваше время. Строго соблюдаем оговоренные сроки изготовления и монтажа.</p>
                 </div>
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Детская мебель
-                    </h3>
-                </div>
-                <div class="group border-b border-white/10 pb-8 hover:border-lime-accent transition-colors duration-500 cursor-pointer fade-in-up">
-                    <h3 class="font-display text-4xl md:text-5xl text-white/40 group-hover:text-white group-hover:translate-x-4 transition-all duration-500 uppercase">
-                        Корпусная мебель
-                    </h3>
+                 <!-- Card 5 -->
+                 <div class="glass-card p-8 rounded-xl reveal relative overflow-hidden group" style="transition-delay: 400ms;">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl group-hover:bg-brand-lime/20 transition-all"></div>
+                    <i data-lucide="crown" class="w-10 h-10 text-brand-lime mb-6"></i>
+                    <h3 class="font-display text-xl text-white mb-3">Премиальный сервис</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Персональный менеджер, внимательное сопровождение от первого звонка до финальной уборки.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 bg-dark-800 relative overflow-hidden">
-        <!-- Glow Bg -->
-        <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-lime-accent/5 rounded-full blur-[150px] pointer-events-none"></div>
-
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="font-display text-4xl md:text-6xl uppercase mb-16 text-center fade-in-up">
-                Избранные <span class="text-lime-accent">Проекты</span>
-            </h2>
-
-            <!-- Kitchens -->
-            <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Кухни</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">01</span>
+    <section id="portfolio" class="py-24 bg-[#080808] relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="font-display text-4xl md:text-6xl text-white mb-2">Наши <span class="text-brand-lime">Работы</span></h2>
+                    <p class="text-gray-400">Реализованные проекты для наших клиентов</p>
                 </div>
-                <!-- Horizontal Scroll Snap on Mobile, Grid on Desktop -->
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/pjjd5cdb/IMG-8911.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Кухня 1">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <i class="fa-solid fa-magnifying-glass text-lime-accent text-2xl"></i>
-                        </div>
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/Cswggn42/IMG-8103.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Кухня 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/HTzvNwHW/IMG-8913.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Кухня 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/Lh2yrq59/IMG-8914.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Кухня 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/0ybs7sg9/IMG-8915.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Кухня 5">
-                    </div>
+                
+                <!-- Filter Tabs -->
+                <div class="mt-8 md:mt-0 flex flex-wrap gap-2" id="portfolio-filters">
+                    <button class="filter-btn active px-4 py-2 text-sm uppercase tracking-wider border border-brand-lime bg-brand-lime text-black font-bold rounded-sm transition-all" data-filter="all">Все</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="kitchens">Кухни</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="wardrobes">Шкафы</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="coupe">Шкафы-купе</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="office">Офис</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="kids">Детские</button>
+                    <button class="filter-btn px-4 py-2 text-sm uppercase tracking-wider border border-white/20 text-white hover:border-brand-lime hover:text-brand-lime rounded-sm transition-all" data-filter="corp">Корпусная</button>
                 </div>
             </div>
 
-            <!-- Wardrobes (Шкафы) -->
-            <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Шкафы</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">02</span>
-                </div>
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/jPFnm80k/IMG-8917.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Шкаф 1">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/4nsbP8wB/IMG-8918.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Шкаф 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/Dg10Jf13/IMG-8919.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Шкаф 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/fY5PTD9b/IMG-8920.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Шкаф 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/JWCFjtRz/IMG-8921.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Шкаф 5">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Wardrobes Sliding (Шкафы Купе) -->
-            <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Шкафы-Купе</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">03</span>
-                </div>
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/CpkhzhVt/IMG-8922.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Купе 1">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/9Hxwc6qF/IMG-8923.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Купе 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/DDvJQ2Zb/IMG-8924.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Купе 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/wNyVHZv3/IMG-8925.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Купе 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/wFVCLs16/IMG-8926.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Купе 5">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Office (Офис) -->
-            <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Офис</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">04</span>
-                </div>
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/tMfdxBWs/IMG-8927.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Офис 1">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/LsG0wg0/IMG-8928.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Офис 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/whth7td9/IMG-8929.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Офис 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/G4zmHwL0/IMG-8930.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Офис 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/fdpSWzgZ/IMG-8931.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Офис 5">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kids (Детская) -->
-            <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Детская</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">05</span>
-                </div>
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/9mrxYHpw/IMG-8932.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Детская 1">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/VWyz3Z33/IMG-8933.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Детская 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/TzFtxyn/IMG-8934.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Детская 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/tMmJFD4h/IMG-8935.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Детская 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/99Xcx60y/IMG-8936.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Детская 5">
-                    </div>
-                </div>
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                <!-- Javascript will inject images here -->
             </div>
             
-             <!-- Corpus (Корпусная) -->
-             <div class="mb-20 fade-in-up">
-                <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
-                    <h3 class="font-display text-3xl text-white">Корпусная мебель</h3>
-                    <span class="text-lime-accent font-sans text-sm tracking-wider">06</span>
-                </div>
-                <div class="snap-scroll-x md:grid md:grid-cols-5 md:gap-4 no-scrollbar">
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/TDsM87Xq/IMG-8937.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Корпус 1">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/mFJNMM7r/IMG-8938.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Корпус 2">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/XZFSnwRZ/IMG-8939.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Корпус 3">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/C36BW1Gg/IMG-8940.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Корпус 4">
-                    </div>
-                    <div class="w-[80vw] md:w-auto h-64 md:h-80 rounded-xl overflow-hidden glass-panel group relative flex-shrink-0">
-                        <img src="https://i.ibb.co/d45HbrxB/IMG-8942.jpg" class="w-full h-full object-cover hover-scale-img" loading="lazy" alt="Корпус 5">
-                    </div>
-                </div>
+            <div class="mt-12 text-center">
+                 <a href="https://t.me/ecopointanapa" class="inline-block border-b border-brand-lime text-brand-lime pb-1 hover:text-white hover:border-white transition-colors">Хочу такой же проект</a>
             </div>
         </div>
     </section>
 
-    <!-- Why Us Section -->
-    <section id="why-us" class="py-24 bg-dark-900 relative">
-        <div class="container mx-auto px-4">
-            <h2 class="font-display text-4xl md:text-6xl uppercase mb-16 text-center text-white fade-in-up">
-                Почему <span class="text-lime-accent">Выбирают Нас</span>
-            </h2>
+    <!-- Work Process -->
+    <section id="process" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl md:text-5xl text-white mb-16 text-center reveal">Этапы <span class="text-brand-lime">Создания</span></h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="glass-panel p-8 rounded-2xl box-glow transition-all duration-300 group fade-in-up">
-                    <i class="fa-solid fa-gem text-4xl text-lime-accent mb-6 group-hover:scale-110 transition-transform duration-300 block"></i>
-                    <h3 class="font-display text-xl uppercase mb-3">Премиальные материалы</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Используем только высококачественные и экологичные материалы европейского стандарта.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="glass-panel p-8 rounded-2xl box-glow transition-all duration-300 group fade-in-up delay-100">
-                    <i class="fa-solid fa-pen-ruler text-4xl text-lime-accent mb-6 group-hover:scale-110 transition-transform duration-300 block"></i>
-                    <h3 class="font-display text-xl uppercase mb-3">Индивидуальный дизайн</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Мебель создаётся под ваш интерьер, учитывая каждый сантиметр пространства.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass-panel p-8 rounded-2xl box-glow transition-all duration-300 group fade-in-up delay-200">
-                    <i class="fa-solid fa-industry text-4xl text-lime-accent mb-6 group-hover:scale-110 transition-transform duration-300 block"></i>
-                    <h3 class="font-display text-xl uppercase mb-3">Собственное производство</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Современное оборудование и команда опытных мастеров в Анапе.</p>
-                </div>
-                 <!-- Card 4 -->
-                 <div class="glass-panel p-8 rounded-2xl box-glow transition-all duration-300 group fade-in-up">
-                    <i class="fa-solid fa-clock text-4xl text-lime-accent mb-6 group-hover:scale-110 transition-transform duration-300 block"></i>
-                    <h3 class="font-display text-xl uppercase mb-3">Сроки и надёжность</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Строго соблюдаем договорённости. Ваше время — наша ценность.</p>
-                </div>
-                 <!-- Card 5 -->
-                 <div class="glass-panel p-8 rounded-2xl box-glow transition-all duration-300 group fade-in-up delay-100">
-                    <i class="fa-solid fa-crown text-4xl text-lime-accent mb-6 group-hover:scale-110 transition-transform duration-300 block"></i>
-                    <h3 class="font-display text-xl uppercase mb-3">Премиальный сервис</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Персональный менеджер, внимательное сопровождение от замера до установки.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-y-1/2 z-0"></div>
 
-    <!-- Process Section -->
-    <section class="py-24 bg-dark-800 relative">
-        <div class="container mx-auto px-4">
-            <h2 class="font-display text-4xl md:text-6xl uppercase mb-16 text-center text-white fade-in-up">
-                Процесс <span class="text-lime-accent">Работы</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <!-- Step 1 -->
-                <div class="relative glass-panel p-6 rounded-xl text-center group fade-in-up">
-                    <div class="w-12 h-12 rounded-full bg-lime-accent/10 border border-lime-accent flex items-center justify-center mx-auto mb-4 text-lime-accent font-bold font-display text-xl group-hover:bg-lime-accent group-hover:text-black transition-colors">01</div>
-                    <i class="fa-solid fa-comments text-2xl text-gray-400 mb-4"></i>
-                    <h4 class="font-bold uppercase text-sm mb-2">Консультация</h4>
-                    <p class="text-xs text-gray-400">Обсуждение целей и стиля</p>
-                </div>
-                <!-- Step 2 -->
-                <div class="relative glass-panel p-6 rounded-xl text-center group fade-in-up delay-100">
-                    <div class="w-12 h-12 rounded-full bg-lime-accent/10 border border-lime-accent flex items-center justify-center mx-auto mb-4 text-lime-accent font-bold font-display text-xl group-hover:bg-lime-accent group-hover:text-black transition-colors">02</div>
-                    <i class="fa-solid fa-ruler-combined text-2xl text-gray-400 mb-4"></i>
-                    <h4 class="font-bold uppercase text-sm mb-2">Замер и Дизайн</h4>
-                    <p class="text-xs text-gray-400">Выезд и создание 3D проекта</p>
-                </div>
-                 <!-- Step 3 -->
-                 <div class="relative glass-panel p-6 rounded-xl text-center group fade-in-up delay-200">
-                    <div class="w-12 h-12 rounded-full bg-lime-accent/10 border border-lime-accent flex items-center justify-center mx-auto mb-4 text-lime-accent font-bold font-display text-xl group-hover:bg-lime-accent group-hover:text-black transition-colors">03</div>
-                    <i class="fa-solid fa-screwdriver-wrench text-2xl text-gray-400 mb-4"></i>
-                    <h4 class="font-bold uppercase text-sm mb-2">Производство</h4>
-                    <p class="text-xs text-gray-400">Изготовление на станках</p>
-                </div>
-                 <!-- Step 4 -->
-                 <div class="relative glass-panel p-6 rounded-xl text-center group fade-in-up delay-300">
-                    <div class="w-12 h-12 rounded-full bg-lime-accent/10 border border-lime-accent flex items-center justify-center mx-auto mb-4 text-lime-accent font-bold font-display text-xl group-hover:bg-lime-accent group-hover:text-black transition-colors">04</div>
-                    <i class="fa-solid fa-truck-fast text-2xl text-gray-400 mb-4"></i>
-                    <h4 class="font-bold uppercase text-sm mb-2">Доставка</h4>
-                    <p class="text-xs text-gray-400">Аккуратная транспортировка</p>
-                </div>
-                 <!-- Step 5 -->
-                 <div class="relative glass-panel p-6 rounded-xl text-center group fade-in-up delay-400">
-                    <div class="w-12 h-12 rounded-full bg-lime-accent/10 border border-lime-accent flex items-center justify-center mx-auto mb-4 text-lime-accent font-bold font-display text-xl group-hover:bg-lime-accent group-hover:text-black transition-colors">05</div>
-                    <i class="fa-solid fa-medal text-2xl text-gray-400 mb-4"></i>
-                    <h4 class="font-bold uppercase text-sm mb-2">Гарантия</h4>
-                    <p class="text-xs text-gray-400">Монтаж и поддержка</p>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="glass-nav p-6 rounded-lg text-center reveal group hover:-translate-y-2 transition-transform duration-500">
+                        <div class="w-12 h-12 mx-auto bg-brand-lime/10 rounded-full flex items-center justify-center text-brand-lime font-display text-xl mb-4 border border-brand-lime/20 group-hover:bg-brand-lime group-hover:text-black transition-colors">01</div>
+                        <h4 class="text-white font-bold mb-2">Консультация</h4>
+                        <p class="text-xs text-gray-400">Обсуждение целей и стиля</p>
+                    </div>
+                     <!-- Step 2 -->
+                     <div class="glass-nav p-6 rounded-lg text-center reveal group hover:-translate-y-2 transition-transform duration-500" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 mx-auto bg-brand-lime/10 rounded-full flex items-center justify-center text-brand-lime font-display text-xl mb-4 border border-brand-lime/20 group-hover:bg-brand-lime group-hover:text-black transition-colors">02</div>
+                        <h4 class="text-white font-bold mb-2">Замер и Дизайн</h4>
+                        <p class="text-xs text-gray-400">Выезд мастера, 3D-проект</p>
+                    </div>
+                     <!-- Step 3 -->
+                     <div class="glass-nav p-6 rounded-lg text-center reveal group hover:-translate-y-2 transition-transform duration-500" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 mx-auto bg-brand-lime/10 rounded-full flex items-center justify-center text-brand-lime font-display text-xl mb-4 border border-brand-lime/20 group-hover:bg-brand-lime group-hover:text-black transition-colors">03</div>
+                        <h4 class="text-white font-bold mb-2">Производство</h4>
+                        <p class="text-xs text-gray-400">Изготовление мебели</p>
+                    </div>
+                     <!-- Step 4 -->
+                     <div class="glass-nav p-6 rounded-lg text-center reveal group hover:-translate-y-2 transition-transform duration-500" style="transition-delay: 300ms;">
+                        <div class="w-12 h-12 mx-auto bg-brand-lime/10 rounded-full flex items-center justify-center text-brand-lime font-display text-xl mb-4 border border-brand-lime/20 group-hover:bg-brand-lime group-hover:text-black transition-colors">04</div>
+                        <h4 class="text-white font-bold mb-2">Монтаж</h4>
+                        <p class="text-xs text-gray-400">Аккуратная установка</p>
+                    </div>
+                     <!-- Step 5 -->
+                     <div class="glass-nav p-6 rounded-lg text-center reveal group hover:-translate-y-2 transition-transform duration-500" style="transition-delay: 400ms;">
+                        <div class="w-12 h-12 mx-auto bg-brand-lime/10 rounded-full flex items-center justify-center text-brand-lime font-display text-xl mb-4 border border-brand-lime/20 group-hover:bg-brand-lime group-hover:text-black transition-colors">05</div>
+                        <h4 class="text-white font-bold mb-2">Гарантия</h4>
+                        <p class="text-xs text-gray-400">Поддержка и сервис</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-dark-900">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row gap-12 items-center">
-                <!-- Text Content -->
-                <div class="lg:w-1/2 fade-in-up">
-                    <h2 class="font-display text-4xl md:text-5xl uppercase mb-8">
-                        О Компании <span class="text-lime-accent">ЭКО-ТОЧКА</span>
-                    </h2>
-                    <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-lime-accent/5 rounded-full blur-2xl"></div>
-                        
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Мы не просто производим мебель — мы создаем пространство для жизни. Под руководством <span class="text-white font-bold">Клепикова Александра Олеговича</span>, наша компания зарекомендовала себя как лидер в сегменте индивидуальной мебели в Анапе и Краснодарском крае.
-                        </p>
-                        
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-location-dot text-lime-accent"></i>
-                                <span class="text-sm">География: Анапа и весь Краснодарский край</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-microchip text-lime-accent"></i>
-                                <span class="text-sm">Технологии: Высокоточная обработка материалов</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-users text-lime-accent"></i>
-                                <span class="text-sm">Команда: Профессиональные дизайнеры и сборщики</span>
-                            </li>
-                        </ul>
+    <section id="about" class="py-24 bg-[#080808] overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 reveal">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/LsG0wg0/IMG-8928.jpg" alt="Производство" class="rounded-lg shadow-2xl opacity-80 filter grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="absolute -bottom-6 -right-6 w-48 h-48 border-2 border-brand-lime/30 rounded-lg -z-10"></div>
+                        <div class="absolute -top-6 -left-6 w-24 h-24 bg-brand-lime/10 rounded-full blur-xl"></div>
                     </div>
                 </div>
-
-                <!-- Image Grid -->
-                <div class="lg:w-1/2 grid grid-cols-2 gap-4 fade-in-up delay-100">
-                    <div class="glass-panel p-2 rounded-xl h-48 md:h-64 overflow-hidden">
-                        <img src="https://i.ibb.co/60B1mjXM/IMG-5045.jpg" class="w-full h-full object-cover hover-scale-img" alt="Цех">
-                    </div>
-                    <div class="glass-panel p-2 rounded-xl h-48 md:h-64 overflow-hidden mt-8">
-                        <img src="https://i.ibb.co/jPFnm80k/IMG-8917.jpg" class="w-full h-full object-cover hover-scale-img" alt="Производство">
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-brand-lime uppercase tracking-widest text-sm font-semibold">О компании</span>
+                    <h2 class="font-display text-4xl md:text-5xl text-white mt-2 mb-6">ЭКО-ТОЧКА</h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Основатель компании — <span class="text-white font-medium">Клепиков Александр Олегович</span>. Мы не просто пилим доски, мы создаем пространство для жизни. Наша география — Анапа и весь Краснодарский край.
+                    </p>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        В нашем распоряжении современный цех с высокоточным оборудованием. Команда профессиональных дизайнеров и сборщиков превращает ваши идеи в реальность с точностью до миллиметра.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="map-pin" class="text-brand-lime mt-1"></i>
+                            <div>
+                                <h5 class="text-white font-bold">География</h5>
+                                <p class="text-sm text-gray-500">Анапа и край</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="shield-check" class="text-brand-lime mt-1"></i>
+                            <div>
+                                <h5 class="text-white font-bold">Гарантия</h5>
+                                <p class="text-sm text-gray-500">На все изделия</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Materials Section -->
-    <section class="py-24 bg-dark-800">
-        <div class="container mx-auto px-4">
-             <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-in-up">
-                <h2 class="font-display text-4xl uppercase max-w-lg">Материалы и <span class="text-lime-accent">Технологии</span></h2>
-                <div class="flex gap-4 mt-6 md:mt-0 text-3xl text-gray-500">
-                    <i class="fa-solid fa-tree hover:text-lime-accent transition-colors"></i>
-                    <i class="fa-solid fa-layer-group hover:text-lime-accent transition-colors"></i>
-                    <i class="fa-solid fa-gears hover:text-lime-accent transition-colors"></i>
+    <!-- Reviews (Static for Single File) -->
+    <section id="reviews" class="py-24">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl text-center text-white mb-12 reveal">Что говорят <span class="text-brand-lime">Клиенты</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-xl reveal">
+                    <div class="flex text-brand-lime mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 italic">"Заказывали кухню в Эко-Точка. Результат превзошел ожидания! Качество материалов на высоте, всё продумано до мелочей. Спасибо Александру!"</p>
+                    <p class="text-white font-bold text-sm">Елена М., Анапа</p>
                 </div>
-             </div>
+                
+                <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 100ms;">
+                    <div class="flex text-brand-lime mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 italic">"Шкаф-купе вписался идеально. Очень аккуратные сборщики, всё убрали за собой. Рекомендую всем, кто ищет качество."</p>
+                    <p class="text-white font-bold text-sm">Сергей В., Новороссийск</p>
+                </div>
 
-             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                 <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors fade-in-up">
-                     <h4 class="font-display text-xl text-white mb-2">Дерево и МДФ</h4>
-                     <p class="text-sm text-gray-400">Использование материалов премиум-класса с экологичными сертификатами.</p>
-                 </div>
-                 <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors fade-in-up delay-100">
-                     <h4 class="font-display text-xl text-white mb-2">Фурнитура</h4>
-                     <p class="text-sm text-gray-400">Комплектующие от ведущих мировых брендов (Blum, Hettich) для плавного хода.</p>
-                 </div>
-                 <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors fade-in-up delay-200">
-                     <h4 class="font-display text-xl text-white mb-2">Лазерная обработка</h4>
-                     <p class="text-sm text-gray-400">Идеальная кромка и геометрия фасадов благодаря современным станкам.</p>
-                 </div>
-                 <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors fade-in-up delay-300">
-                     <h4 class="font-display text-xl text-white mb-2">Контроль качества</h4>
-                     <p class="text-sm text-gray-400">Многоэтапная проверка каждой детали перед сборкой.</p>
-                 </div>
-             </div>
-        </div>
-    </section>
-
-    <!-- Reviews -->
-    <section id="reviews" class="py-24 bg-dark-900 overflow-hidden">
-        <div class="container mx-auto px-4 mb-12">
-            <h2 class="font-display text-4xl text-center uppercase fade-in-up">Отзывы <span class="text-lime-accent">Клиентов</span></h2>
-        </div>
-        
-        <div class="flex gap-6 overflow-x-auto snap-scroll-x px-4 pb-8 container mx-auto no-scrollbar fade-in-up">
-            <!-- Review 1 -->
-            <div class="glass-panel p-6 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
-                <div class="flex items-center gap-2 mb-4 text-lime-accent text-sm">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-gray-300 italic mb-4">"Заказывали кухню в Эко-Точка. Результат превзошел ожидания! Материалы супер, сборка идеальная. Александр лично контролировал процесс."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-display font-bold">И</div>
-                    <div>
-                        <h5 class="font-bold text-sm">Ирина М.</h5>
-                        <p class="text-xs text-gray-500">Кухня на заказ</p>
+                <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 200ms;">
+                    <div class="flex text-brand-lime mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                     </div>
-                </div>
-            </div>
-            <!-- Review 2 -->
-            <div class="glass-panel p-6 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
-                <div class="flex items-center gap-2 mb-4 text-lime-accent text-sm">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-gray-300 italic mb-4">"Очень довольны шкафом-купе. Дизайнер учел все неровности наших стен. Выглядит дорого и стильно."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-display font-bold">С</div>
-                    <div>
-                        <h5 class="font-bold text-sm">Сергей П.</h5>
-                        <p class="text-xs text-gray-500">Шкаф-купе</p>
-                    </div>
-                </div>
-            </div>
-             <!-- Review 3 -->
-             <div class="glass-panel p-6 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
-                <div class="flex items-center gap-2 mb-4 text-lime-accent text-sm">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-gray-300 italic mb-4">"Офисная мебель высшего класса. Заказывали для кабинета руководителя. Сроки соблюдены четко."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-display font-bold">В</div>
-                    <div>
-                        <h5 class="font-bold text-sm">Виталий К.</h5>
-                        <p class="text-xs text-gray-500">Офис</p>
-                    </div>
+                    <p class="text-gray-300 text-sm mb-4 italic">"Офисная мебель выглядит очень солидно. Сроки соблюдены, что для нас было критично. Приятно работать с профессионалами."</p>
+                    <p class="text-white font-bold text-sm">ООО "Вектор"</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call To Action (3D Project) -->
+    <!-- Free Measurement CTA -->
     <section class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-lime-accent/5"></div>
-        <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-lime-accent/10 rounded-full blur-[100px]"></div>
-
-        <div class="container mx-auto px-4 relative z-10 text-center">
-            <div class="glass-panel max-w-4xl mx-auto p-12 rounded-3xl border-lime-accent/20 box-glow fade-in-up">
-                <div class="flex justify-center gap-6 mb-8 text-4xl text-gray-400">
-                    <i class="fa-solid fa-tape"></i>
-                    <i class="fa-solid fa-cube"></i>
-                    <i class="fa-solid fa-pen-nib"></i>
-                </div>
-                <h2 class="font-display text-4xl md:text-5xl uppercase mb-4 text-white">
-                    Бесплатный замер и <br><span class="text-lime-accent">3D-проект интерьера</span>
-                </h2>
+        <div class="absolute inset-0 bg-brand-lime/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="glass-card max-w-4xl mx-auto p-12 rounded-2xl border-brand-lime/20 reveal">
+                <h2 class="font-display text-4xl md:text-5xl text-white mb-6">Бесплатный Замер и <span class="text-brand-lime">3D-Проект</span></h2>
                 <p class="text-gray-300 mb-8 max-w-xl mx-auto">
-                    Оставьте заявку, и мы создадим визуализацию вашей будущей мебели, чтобы вы увидели результат ещё до начала производства.
+                    Оставьте заявку сейчас, и мы разработаем индивидуальный дизайн-проект вашей мебели совершенно бесплатно.
                 </p>
-                <a href="https://t.me/ecopointanapa" target="_blank" class="inline-flex items-center gap-3 bg-lime-accent text-black font-bold py-4 px-12 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(204,255,0,0.4)]">
-                    <span>Заказать замер</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://t.me/ecopointanapa" class="px-8 py-4 bg-brand-lime text-black font-bold uppercase tracking-wider rounded shadow-[0_0_20px_rgba(212,242,52,0.4)] hover:shadow-[0_0_30px_rgba(212,242,52,0.6)] hover:scale-105 transition-all">
+                        Заказать замер
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex justify-center gap-8 text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="ruler" class="w-5 h-5"></i>
+                        <span>Точный замер</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                        <span>3D Визуализация</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contacts -->
-    <footer class="bg-dark-900 border-t border-white/5 pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
-                <!-- Logo -->
-                <div class="text-center md:text-left">
-                    <h2 class="font-display text-2xl font-bold tracking-wider mb-2">ЭКО-ТОЧКА</h2>
-                    <p class="text-gray-500 text-sm">Премиальная мебель в Анапе</p>
+    <!-- Footer / Contacts -->
+    <footer class="bg-[#050505] border-t border-white/5 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+                <div>
+                    <a href="#" class="font-display text-3xl text-white mb-4 block">ЭКО<span class="text-brand-lime">-ТОЧКА</span></a>
+                    <p class="text-gray-500 max-w-xs text-sm">
+                        Производство премиальной корпусной мебели в Анапе. Индивидуальный подход к каждому сантиметру вашего пространства.
+                    </p>
                 </div>
-
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                    <a href="tel:+79088041994" class="glass-panel flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-lime-accent hover:bg-lime-accent hover:text-black transition-all duration-300">
-                        <i class="fa-solid fa-phone"></i>
-                        <span class="font-bold font-display tracking-wide">+7 (908) 804-19-94</span>
+                
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-white font-bold uppercase tracking-wider text-sm">Контакты</h4>
+                    <a href="tel:+79088041994" class="text-gray-300 hover:text-brand-lime transition-colors flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        +7 (908) 804-19-94
                     </a>
-                    <a href="https://t.me/ecopointanapa" target="_blank" class="glass-panel flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-blue-400 border-blue-400/30 hover:bg-blue-500 hover:text-white transition-all duration-300">
-                        <i class="fa-brands fa-telegram"></i>
-                        <span class="font-bold font-display tracking-wide">Telegram</span>
+                    <a href="https://t.me/ecopointanapa" class="text-gray-300 hover:text-brand-lime transition-colors flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        Telegram: @ecopointanapa
                     </a>
+                    <span class="text-gray-500 text-sm">г. Анапа, Краснодарский край</span>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4">Меню</h4>
+                    <div class="flex flex-col gap-2 text-sm text-gray-500">
+                        <a href="#portfolio" class="hover:text-white transition-colors">Портфолио</a>
+                        <a href="#why-us" class="hover:text-white transition-colors">О нас</a>
+                        <a href="#reviews" class="hover:text-white transition-colors">Отзывы</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="text-center border-t border-white/5 pt-8">
-                <p class="text-gray-600 text-xs">
-                    &copy; 2024 ЭКО-ТОЧКА. Все права защищены. <br>
-                    Design by World Class AI Studio.
-                </p>
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+                <p>&copy; 2025 ЭКО-ТОЧКА. Все права защищены.</p>
+                <p>Designed for Excellence.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Loader Animation
-            const loader = document.getElementById('loader');
+        // --- 1. Icons Initialization ---
+        lucide.createIcons();
+
+        // --- 2. Portfolio Logic ---
+        const portfolioData = {
+            kitchens: [
+                'https://i.ibb.co/pjjd5cdb/IMG-8911.jpg',
+                'https://i.ibb.co/Cswggn42/IMG-8103.jpg',
+                'https://i.ibb.co/HTzvNwHW/IMG-8913.jpg',
+                'https://i.ibb.co/Lh2yrq59/IMG-8914.jpg',
+                'https://i.ibb.co/0ybs7sg9/IMG-8915.jpg'
+            ],
+            wardrobes: [
+                'https://i.ibb.co/jPFnm80k/IMG-8917.jpg',
+                'https://i.ibb.co/4nsbP8wB/IMG-8918.jpg',
+                'https://i.ibb.co/Dg10Jf13/IMG-8919.jpg',
+                'https://i.ibb.co/fY5PTD9b/IMG-8920.jpg',
+                'https://i.ibb.co/JWCFjtRz/IMG-8921.jpg'
+            ],
+            coupe: [
+                'https://i.ibb.co/CpkhzhVt/IMG-8922.jpg',
+                'https://i.ibb.co/9Hxwc6qF/IMG-8923.jpg',
+                'https://i.ibb.co/DDvJQ2Zb/IMG-8924.jpg',
+                'https://i.ibb.co/wNyVHZv3/IMG-8925.jpg',
+                'https://i.ibb.co/wFVCLs16/IMG-8926.jpg'
+            ],
+            office: [
+                'https://i.ibb.co/tMfdxBWs/IMG-8927.jpg',
+                'https://i.ibb.co/LsG0wg0/IMG-8928.jpg',
+                'https://i.ibb.co/whth7td9/IMG-8929.jpg',
+                'https://i.ibb.co/G4zmHwL0/IMG-8930.jpg',
+                'https://i.ibb.co/fdpSWzgZ/IMG-8931.jpg'
+            ],
+            kids: [
+                'https://i.ibb.co/9mrxYHpw/IMG-8932.jpg',
+                'https://i.ibb.co/VWyz3Z33/IMG-8933.jpg',
+                'https://i.ibb.co/TzFtxyn/IMG-8934.jpg',
+                'https://i.ibb.co/tMmJFD4h/IMG-8935.jpg',
+                'https://i.ibb.co/99Xcx60y/IMG-8936.jpg'
+            ],
+            corp: [
+                'https://i.ibb.co/TDsM87Xq/IMG-8937.jpg',
+                'https://i.ibb.co/mFJNMM7r/IMG-8938.jpg',
+                'https://i.ibb.co/XZFSnwRZ/IMG-8939.jpg',
+                'https://i.ibb.co/C36BW1Gg/IMG-8940.jpg',
+                'https://i.ibb.co/d45HbrxB/IMG-8942.jpg'
+            ]
+        };
+
+        const grid = document.getElementById('portfolio-grid');
+        const buttons = document.querySelectorAll('.filter-btn');
+
+        function renderImages(category) {
+            grid.innerHTML = '';
+            grid.style.opacity = '0'; // Smooth transition start
+            
             setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 1500);
-
-            // Scroll Animation Observer
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Animate only once
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-up').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Mobile Menu Toggle
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            let isMenuOpen = false;
-
-            mobileBtn.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('-translate-y-[150%]');
-                    mobileBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                let imagesToShow = [];
+                if (category === 'all') {
+                    // Flatten all arrays for 'all' view
+                    Object.values(portfolioData).forEach(arr => imagesToShow.push(...arr));
+                    // Limit to random 9 for "All" view to save space
+                    imagesToShow = imagesToShow.sort(() => 0.5 - Math.random()).slice(0, 9);
                 } else {
-                    mobileMenu.classList.add('-translate-y-[150%]');
-                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
+                    imagesToShow = portfolioData[category];
                 }
-            });
 
-            // Close mobile menu on link click
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    isMenuOpen = false;
-                    mobileMenu.classList.add('-translate-y-[150%]');
-                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
+                imagesToShow.forEach((src, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'group relative overflow-hidden rounded-lg aspect-[4/3] bg-gray-800 cursor-pointer';
+                    card.innerHTML = `
+                        <img src="${src}" alt="Мебель" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-brand-lime border border-brand-lime px-4 py-2 uppercase tracking-wider text-sm font-bold">Смотреть</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
                 });
-            });
+                
+                grid.style.opacity = '1'; // Smooth transition end
+            }, 300);
+        }
 
-            // Navbar Scroll Effect
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('py-2');
-                    navbar.classList.remove('py-4');
-                } else {
-                    navbar.classList.add('py-4');
-                    navbar.classList.remove('py-2');
-                }
-            });
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                buttons.forEach(b => {
+                    b.classList.remove('bg-brand-lime', 'text-black', 'font-bold', 'border-brand-lime');
+                    b.classList.add('text-white', 'border-white/20');
+                });
+                btn.classList.remove('text-white', 'border-white/20');
+                btn.classList.add('bg-brand-lime', 'text-black', 'font-bold', 'border-brand-lime');
 
-            // Parallax Effect (Simple)
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                const parallaxBg = document.querySelector('.parallax-bg');
-                // Only apply if element exists (removed in favor of fixed bg but kept logic if needed)
+                renderImages(btn.dataset.filter);
             });
         });
+
+        // Initial render
+        renderImages('kitchens'); // Start with kitchens as they are most popular
+        // Set Kitchen button active initially
+        buttons.forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-filter="kitchens"]').classList.add('bg-brand-lime', 'text-black', 'font-bold', 'border-brand-lime');
+        document.querySelector('[data-filter="kitchens"]').classList.remove('text-white', 'border-white/20');
+
+
+        // --- 3. Mobile Menu Logic ---
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isClosed = mobileMenu.classList.contains('translate-x-full');
+            if (isClosed) {
+                mobileMenu.classList.remove('translate-x-full');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // --- 4. Scroll Animations (Intersection Observer) ---
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- 5. Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('py-4', 'py-2');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('py-2', 'py-4');
+            }
+        });
+        
+        // --- 6. Parallax Effect on Hero ---
+        const heroBg = document.getElementById('hero-bg');
+        window.addEventListener('scroll', () => {
+             const scrollPosition = window.pageYOffset;
+             heroBg.style.transform = `translateY(${scrollPosition * 0.5}px) scale(1.1)`;
+        });
+
+        // --- 7. Loader ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
     </script>
 </body>
 </html>
